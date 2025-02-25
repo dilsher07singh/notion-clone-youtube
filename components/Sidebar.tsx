@@ -76,6 +76,9 @@ function Sidebar() {
       <NewDocumentButton />
 
       {/* My documents  */}
+      {groupedData?.owner?.map((curr, index) => {
+        return <div>{curr.roomId}</div>;
+      })}
     </>
   );
   return (
