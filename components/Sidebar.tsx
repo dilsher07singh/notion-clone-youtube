@@ -85,7 +85,7 @@ function Sidebar() {
               My documents
             </h2>
             {groupedData.owner.map((doc) => (
-              <SidebarOption key={doc.id} id={doc.id} href={`doc/${doc.id}`} />
+              <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
             ))}
           </>
         )}
@@ -96,7 +96,7 @@ function Sidebar() {
               Shared with Me
             </h2>
             {groupedData.editor.map((doc) => (
-              <SidebarOption key={doc.id} id={doc.id} href={`doc/${doc.id}`} />
+              <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
             ))}
           </>
         )}
