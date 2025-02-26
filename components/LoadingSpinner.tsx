@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 
 function LoadingSpinner() {
-  console.log("LoadingSpinner");
-  useEffect(() => {
-    setTimeout(() => console.log("Loading..."), 5000);
-  }, []);
-
   return (
     <div role="status" className="flex items-center justify-center mt-10">
       <svg
