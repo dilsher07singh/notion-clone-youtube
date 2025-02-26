@@ -11,6 +11,7 @@ import { Button } from "./ui/button";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
+import Editor from "./Editor";
 
 interface DocumentProps {
   id: string;
@@ -58,7 +59,11 @@ function Document({ id }: DocumentProps) {
         {/* Avatars  */}
       </div>
 
+      <hr className="pb-10" />
+
       {/* Collobarative editor  */}
+
+      <Editor />
     </div>
   );
 }
