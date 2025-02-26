@@ -1,7 +1,18 @@
+"use client";
 import React from "react";
 
-function DocumentPage() {
-  return <div>DocumentPage</div>;
+interface DocumentPageProps {
+  params: {
+    id: string;
+  };
+}
+
+function DocumentPage({ params: { id } }: DocumentPageProps) {
+  console.log("Document ID", id);
+
+  return (
+    <div className="flex flex-col flex-1 min-h-screen">DocumentPage: {id}</div>
+  );
 }
 
 export default DocumentPage;
