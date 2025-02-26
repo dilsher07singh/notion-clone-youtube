@@ -28,12 +28,17 @@ function Breadcrumbs() {
 
           const href = segments.slice(0, index + 1).join("/");
 
-          return (
-            <Fragment key={index}>
-              <BreadcrumbSeparator />
+          const isLast = index === segments.length - 1;
 
-              <BreadcrumbItem key={index}>
-                <BreadcrumbLink href={href}>{segment}</BreadcrumbLink>
+          return (
+            <Fragment key={segment}>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage>{segment}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href={href}>{segment}</BreadcrumbLink>
+                )}
               </BreadcrumbItem>
             </Fragment>
           );
