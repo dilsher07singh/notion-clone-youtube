@@ -16,6 +16,7 @@ import useOwner from "@/lib/useOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
 import ManageUsers from "./ManageUsers";
+import Avatars from "./Avatars";
 
 interface DocumentProps {
   id: string;
@@ -73,6 +74,7 @@ function Document({ id }: DocumentProps) {
         <ManageUsers />
 
         {/* Avatars  */}
+        <Avatars />
       </div>
 
       <hr className="pb-10" />
