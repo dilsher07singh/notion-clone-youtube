@@ -12,6 +12,8 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import Editor from "./Editor";
+import useOwner from "@/lib/useOwner";
+import DeleteDocument from "./DeleteDocument";
 
 interface DocumentProps {
   id: string;
@@ -21,6 +23,7 @@ function Document({ id }: DocumentProps) {
   const [input, setInput] = useState("");
 
   const [isUpdating, startTransition] = useTransition();
+  const isOwner = useOwner();
 
   useEffect(() => {
     if (data) {
@@ -50,6 +53,15 @@ function Document({ id }: DocumentProps) {
 
           <Button>{isUpdating ? "Updating..." : "Update"}</Button>
           {/* IF IS OWNER AND THEN INVITE USER, DELETE DOCUMENT  */}
+
+          {isOwner && (
+            <>
+              {/* Invite user  */}
+
+              {/* Delete document  */}
+              <DeleteDocument />
+            </>
+          )}
         </form>
       </div>
 
