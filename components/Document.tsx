@@ -15,6 +15,7 @@ import Editor from "./Editor";
 import useOwner from "@/lib/useOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
+import ManageUsers from "./ManageUsers";
 
 interface DocumentProps {
   id: string;
@@ -66,8 +67,10 @@ function Document({ id }: DocumentProps) {
         </form>
       </div>
 
-      <div>
+      <div className="flex max-w-6xl mx-auto justify-between items-center mb-5">
         {/* Manage Users  */}
+
+        <ManageUsers />
 
         {/* Avatars  */}
       </div>
