@@ -14,6 +14,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import Editor from "./Editor";
 import useOwner from "@/lib/useOwner";
 import DeleteDocument from "./DeleteDocument";
+import InviteUser from "./InviteUser";
 
 interface DocumentProps {
   id: string;
@@ -57,7 +58,7 @@ function Document({ id }: DocumentProps) {
           {isOwner && (
             <>
               {/* Invite user  */}
-
+              <InviteUser />
               {/* Delete document  */}
               <DeleteDocument />
             </>
