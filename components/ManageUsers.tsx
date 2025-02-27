@@ -14,7 +14,11 @@ import {
 import { Button } from "./ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { collectionGroup, deleteDoc, query, where } from "firebase/firestore";
-import { deleteDocument, inviteUserToDocument } from "@/actions/actions";
+import {
+  deleteDocument,
+  inviteUserToDocument,
+  removeUserFromDocument,
+} from "@/actions/actions";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
 import { useUser } from "@clerk/nextjs";
@@ -36,7 +40,20 @@ function ManageUsers() {
     user && query(collectionGroup(db, "rooms"), where("roomId", "==", room.id))
   );
 
-  const handleDelete = (userId: string) => {};
+  const handleDelete = (userId: string) => {
+    startTransition(async () => {
+      if (!user) return;
+
+      const { success } = await removeUserFromDocument(room.id, userId);
+
+      if (success) {
+        toast.success("User removed from room successfully!");
+      } else {
+        toast.error("Failed to remove user from room!");
+      }
+    });
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <Button asChild variant={"outline"}>
@@ -51,7 +68,36 @@ function ManageUsers() {
         </DialogHeader>
         <hr className="my-2" />
 
-        <div>{/* Map the users  */}</div>
+        <div className="flex flex-col space-y-2">
+          {usersInRoom?.docs.map((doc) => (
+            <div
+              key={doc.data().userId}
+              className="flex items-center justify-between"
+            >
+              <p className="font-light">
+                {doc.data().userId === user?.emailAddresses[0].toString()
+                  ? `You (${doc.data().userId})`
+                  : doc.data().userId}
+              </p>
+
+              <div className="flex items-center gap-2">
+                <Button variant="outline">{doc.data().role}</Button>
+
+                {isOwner &&
+                  doc.data().userId !== user?.emailAddresses[0].toString() && (
+                    <Button
+                      variant="destructive"
+                      onClick={() => handleDelete(doc.data().userId)}
+                      disabled={isPending}
+                      size="sm"
+                    >
+                      {isPending ? "Removing..." : "X"}
+                    </Button>
+                  )}
+              </div>
+            </div>
+          ))}
+        </div>
       </DialogContent>
     </Dialog>
   );
