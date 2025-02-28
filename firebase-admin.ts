@@ -1,13 +1,18 @@
 import { getApps, initializeApp, getApp, App, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
-const serviceKey = require("@/service_key.json");
-
 let app: App;
 
-if (getApps().length === 0) {
+if (!getApps().length) {
   app = initializeApp({
-    credential: cert(serviceKey),
+    credential: cert(
+      JSON.parse(
+        Buffer.from(
+          process.env.FIREBASE_SERVICE_KEY as string,
+          "base64"
+        ).toString("utf8")
+      )
+    ),
   });
 } else {
   app = getApp();
