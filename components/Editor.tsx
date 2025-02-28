@@ -12,6 +12,7 @@ import { useSelf } from "@liveblocks/react/suspense";
 import { useCreateBlockNote } from "@blocknote/react";
 import stringToColor from "@/lib/stringToColor";
 import TranslateDocument from "./TranslateDocument";
+import ChatToDocument from "./ChatToDocument";
 
 type EditorProps = {
   doc: Y.Doc;
@@ -79,6 +80,8 @@ function Editor() {
         <TranslateDocument doc={doc} />
 
         {/* Chat to document AI Features */}
+
+        <ChatToDocument doc={doc} />
 
         {/* Dark mode  */}
         <Button className={style} onClick={() => setDarkMode(!darkMode)}>
